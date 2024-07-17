@@ -87,9 +87,21 @@ const evaluate = (expression) => {
   while (operators.length > 0) {
     let operand1 = operands.pop();
     let operand2 = operands.pop();
-    let operator = operators.pop();
-    let sum = calculate(operand1, operand2, operator);
-
+    let opearator = operators.pop();
+    let sum = 0;
+    switch (opearator) {
+      case "+":
+        sum = operand1 + operand2;
+        break;
+      case "-":
+        sum = operand1 - operand2;
+        break;
+      case "*":
+        sum = operand1 * operand2;
+        break;
+      case "/":
+        sum = operand1 / operand2;
+    }
     operands.push(sum);
   }
   if (isNaN(operands[0])) {
@@ -98,7 +110,8 @@ const evaluate = (expression) => {
     console.log(operands[0]);
   }
 };
-evaluate("2**2");
+evaluate("2*2");
+
 // you need to focus on every edge case and try to handle as many edge cases as you can and try to throw user friendly error
 
 // you need to use better variable names
