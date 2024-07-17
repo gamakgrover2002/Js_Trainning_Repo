@@ -1,4 +1,4 @@
-//converts numbers to array and push
+//converts numbers to array and push into array
 const toArray = (s) => {
   let stack = [];
   for (let i = 0; i < s.length; ) {
@@ -33,6 +33,7 @@ const precedence = (c) => {
 };
 // calculte the valur of converted array
 const calculate = (operand1, operand2, operator) => {
+  let sum;
   switch (operator) {
     case "+":
       sum = operand1 + operand2;
@@ -44,9 +45,11 @@ const calculate = (operand1, operand2, operator) => {
       sum = operand1 * operand2;
       break;
     case "/":
-      sum = operand1 / operand2;
+      sum = operand2 / operand1;
   }
+  return sum;
 };
+// evaluates the final awnser
 const evaluate = (expression) => {
   let arr = toArray(expression);
   let operators = [];
@@ -60,7 +63,7 @@ const evaluate = (expression) => {
           let operand1 = operands.pop();
           let operand2 = operands.pop();
           let operator = operators.pop();
-          let sum = calculate(x, y, z);
+          let sum = calculate(operand1, operand2, operator);
 
           operands.push(sum);
         }
@@ -88,20 +91,8 @@ const evaluate = (expression) => {
     let operand1 = operands.pop();
     let operand2 = operands.pop();
     let opearator = operators.pop();
-    let sum = 0;
-    switch (opearator) {
-      case "+":
-        sum = operand1 + operand2;
-        break;
-      case "-":
-        sum = operand1 - operand2;
-        break;
-      case "*":
-        sum = operand1 * operand2;
-        break;
-      case "/":
-        sum = operand1 / operand2;
-    }
+    let sum = calculate(operand1, operand2, opearator); // use opearator instead of operator
+
     operands.push(sum);
   }
   if (isNaN(operands[0])) {
@@ -110,8 +101,6 @@ const evaluate = (expression) => {
     console.log(operands[0]);
   }
 };
-evaluate("2*2");
-
+evaluate("(20+10)/5");
 // you need to focus on every edge case and try to handle as many edge cases as you can and try to throw user friendly error
-
 // you need to use better variable names
