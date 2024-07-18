@@ -1,11 +1,9 @@
 const minimumReversal = (expression) => {
   let stack = [];
-  if (expression.length == 0) {
-    console.log(0);
-  }
+
   for (let i = 0; i < expression.length; i++) {
     if (expression[i] === "{") {
-      stack.push("(");
+      stack.push("{");
     } else if (expression[i] === "}") {
       stack.pop();
     } else {
@@ -19,4 +17,4 @@ const minimumReversal = (expression) => {
     console.log(-1);
   }
 };
-minimumReversal("{{{{}}");
+minimumReversal("");
